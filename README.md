@@ -264,7 +264,7 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-Kush Mehta
+Nikhil Nayak
 
 GitHub: https://github.com/NikhilNayak12
 
