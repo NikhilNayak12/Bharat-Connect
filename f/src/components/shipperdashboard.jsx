@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Shipperdashboard() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,7 @@ export default function Shipperdashboard() {
     if (!user) return;
 
     axios
-      .get("http://localhost:4500/getbooking", {
+      .get(`${API_BASE_URL}/getbooking`, {
         headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then((res) => setBookings(res.data))

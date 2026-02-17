@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Updatevehicle() {
   const [vehicles, setVehicles] = useState([]);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -32,7 +34,7 @@ export default function Updatevehicle() {
     const driverEmail = decoded.email;
 
     axios
-      .get(`http://localhost:4500/viewvehiclebydriverEmail/${driverEmail}`, {
+      .get(`${API_BASE_URL}/viewvehiclebydriverEmail/${driverEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setVehicles(res.data.vehicles))
@@ -71,7 +73,7 @@ export default function Updatevehicle() {
       if (imageFile) formData.append("image", imageFile);
 
       await axios.put(
-        `http://localhost:4500/updatevehicle/${selectedVehicle.vehicleNumber}`,
+        `${API_BASE_URL}/updatevehicle/${selectedVehicle.vehicleNumber}`,
         formData,
         {
           headers: {
@@ -96,7 +98,7 @@ export default function Updatevehicle() {
       const token = sessionStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:4500/deletevehicle/${vehicleNumber}`,
+        `${API_BASE_URL}/deletevehicle/${vehicleNumber}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

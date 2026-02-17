@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function AI() {
   const [open, setOpen] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -25,7 +27,7 @@ export default function AI() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:4500/api/ai", {
+      const res = await axios.post(`${API_BASE_URL}/api/ai`, {
         prompt: userText
       });
 

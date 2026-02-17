@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4500/login", form);
+      const res = await axios.post(`${API_BASE_URL}/login`, form);
 
       login(res.data.token);
 

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Resetpassword() {
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ export default function Resetpassword() {
     if (!email) return notify("Email is required", "error");
 
     try {
-      await axios.post("http://localhost:4500/resetpassword", { email });
+      await axios.post(`${API_BASE_URL}/resetpassword`, { email });
       notify("OTP sent to your email", "success");
       setStep(2);
     } catch (err) {
@@ -44,7 +46,7 @@ export default function Resetpassword() {
       return notify("Passwords do not match", "error");
 
     try {
-      await axios.post("http://localhost:4500/resetpassword", {
+      await axios.post(`${API_BASE_URL}/resetpassword`, {
         email,
         otp,
         newPassword,

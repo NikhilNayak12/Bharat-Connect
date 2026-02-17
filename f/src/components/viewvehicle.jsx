@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Viewvehicle() {
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ export default function Viewvehicle() {
 
   async function fetchVehicles() {
     try {
-      const res = await axios.get("http://localhost:4500/viewvehicle", {
+      const res = await axios.get(`${API_BASE_URL}/viewvehicle`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token"),
         },

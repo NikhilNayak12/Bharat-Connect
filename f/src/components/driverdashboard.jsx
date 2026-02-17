@@ -13,6 +13,8 @@ import {
   Activity,
 } from "lucide-react";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Driverdashboard() {
   const [bookings, setBookings] = useState([]);
   const [vehicles, setVehicles] = useState([]);
@@ -32,14 +34,14 @@ export default function Driverdashboard() {
   // Fetch dashboard data
   const fetchDashboardData = async () => {
     try {
-      const bookingRes = await axios.get("http://localhost:4500/getbooking", {
+      const bookingRes = await axios.get(`${API_BASE_URL}/getbooking`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       setBookings(bookingRes.data);
 
       const vehicleRes = await axios.get(
-        `http://localhost:4500/viewvehiclebydriverEmail/${email}`,
+        `${API_BASE_URL}/viewvehiclebydriverEmail/${email}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -59,7 +61,7 @@ export default function Driverdashboard() {
   const updateStatus = async (bookingid, status) => {
     try {
       await axios.post(
-        `http://localhost:4500/updatebooking/${bookingid}`,
+        `${API_BASE_URL}/updatebooking/${bookingid}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );

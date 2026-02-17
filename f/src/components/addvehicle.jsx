@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Addvehicle() {
   const [form, setForm] = useState({
     vehicleType: "",
@@ -40,7 +42,7 @@ export default function Addvehicle() {
     images.forEach((img) => formData.append("images", img));
 
     try {
-      await axios.post("http://localhost:4500/addvehicle", formData, {
+      await axios.post(`${API_BASE_URL}/addvehicle`, formData, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token"),
           "Content-Type": "multipart/form-data",

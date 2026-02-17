@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Signup() {
   const [form, setForm] = useState({
     name: "",
@@ -37,7 +39,7 @@ export default function Signup() {
     setMessage("");
 
     try {
-      await axios.post("http://localhost:4500/signup", {
+      await axios.post(`${API_BASE_URL}/signup`, {
         name: form.name,
         email: form.email,
         password: form.password,
@@ -56,7 +58,7 @@ export default function Signup() {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:4500/signup", form);
+      const res = await axios.post(`${API_BASE_URL}/signup`, form);
       sessionStorage.setItem("token", res.data.token);
       setMessage("Signup Successful! Redirecting...");
       setTimeout(() => {

@@ -13,6 +13,8 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 export default function Book() {
   const [vehicles, setVehicles] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -56,7 +58,7 @@ export default function Book() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get("http://localhost:4500/viewvehicle", {
+        const res = await axios.get(`${API_BASE_URL}/viewvehicle`, {
           headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
         });
 
@@ -171,7 +173,7 @@ export default function Book() {
       }).addTo(map)
     );
 
-    const resp = await fetch("http://localhost:4500/map/route", {
+    const resp = await fetch(`${API_BASE_URL}/map/route`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -252,7 +254,7 @@ export default function Book() {
 
     try {
       await axios.post(
-        "http://localhost:4500/createbooking",
+        `${API_BASE_URL}/createbooking`,
         {
           shipperEmail: user.email,
           driverEmail: selected.driverEmail,

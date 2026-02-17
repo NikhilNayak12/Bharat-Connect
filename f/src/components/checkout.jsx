@@ -3,6 +3,8 @@ import axios from "axios";
 import { MapPin, ArrowRight, Truck, IndianRupee } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4500";
+
 
 export default function Checkout() {
   const [bookings, setBookings] = useState([]);
@@ -39,7 +41,7 @@ const navigate = useNavigate();
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get("http://localhost:4500/getbooking", {
+      const res = await axios.get(`${API_BASE_URL}/getbooking`, {
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token"),
         },
@@ -64,7 +66,7 @@ const navigate = useNavigate();
   const handlePayment = async (bookingid) => {
     try {
       await axios.post(
-        `http://localhost:4500/updatebooking/${bookingid}`,
+        `${API_BASE_URL}/updatebooking/${bookingid}`,
         { status: "Paid" },
         {
           headers: {
@@ -95,7 +97,7 @@ const navigate = useNavigate();
   const handleCancel = async (bookingid) => {
     try {
       await axios.post(
-        `http://localhost:4500/updatebooking/${bookingid}`,
+        `${API_BASE_URL}/updatebooking/${bookingid}`,
         { status: "Cancelled" },
         {
           headers: {
