@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-const { generateOTP, storeOTP } = require("../otp/otpService");
+const { generateOTP, storeOTP } = require("../otp/otpservice");
 
 async function sendmail(receiverEmail) {
     try {
